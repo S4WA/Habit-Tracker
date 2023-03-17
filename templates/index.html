@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Habit Tracker</title>
+</head>
+<body>
+  <h1>My Habit Tracker</h1>
+  <table>
+    <tr>
+    {% for name in cl_names %}
+      <th>{{ name }}</th>
+    {% endfor %}
+    </tr>
+
+    {% for row in data %}
+    <tr>
+      {% for name in cl_names %}
+      <td>{{ row[name] }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

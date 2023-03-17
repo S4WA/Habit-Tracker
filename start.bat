@@ -1,2 +1,2 @@
-python3.10 src/__init__.py
+python3.10 __init__.py
 pause
