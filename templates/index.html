@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>My Habit Tracker</title>
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
 <body>
   <h1>My Habit Tracker</h1>
@@ -20,5 +21,18 @@
     </tr>
     {% endfor %}
   </table>
+  <h1>Habit Calendar</h1>
+  <table>
+    {% for week in calendar %}
+    <tr>
+      {% for day in week %}
+      <th info='{{ day }}'>
+        {{ day }}:{{ math_data[day.strftime('%m/%d/%Y')] }}
+      </th>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
 </body>
 </html>
+<!-- {{ math_data }} -->
