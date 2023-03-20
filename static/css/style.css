@@ -2,6 +2,36 @@ table, th, td {
   border: 1px solid;
 }
 
-th, td {
+#pure_log th, #pure_log td {
   padding: 0 1em;
+}
+
+.cldr_cell {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.p0 {
+  background-color: #3f3f3f;
+}
+
+.p25 {
+  background-color: #f9ee85;
+}
+
+.p50 {
+  background-color: #ffee4a;
+}
+
+.p75 {
+  background-color: #ffc501;
+}
+
+.p100 {
+  background-color: #fe9600;
+}
+
+.label {
+  text-align: center;
 }

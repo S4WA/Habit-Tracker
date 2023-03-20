@@ -44,33 +44,41 @@ def fill_empty_dates(date_list):
   date_list.extend(fill_next_days(date_list))
   return date_list
 
-def sort_dates(add_label):
+def sort_dates():
   if not dates: return []
 
   # Sort In Numerical Days.
   dates.sort()
 
   # Sort In Weekdays
-  calander_sort = sorted(dates, key=lambda x: wday(x))
+  calendar_sort = sorted(dates, key=lambda x: wday(x))
 
   result = []
   u = None # The last weekday that the for statement has loaded
   each_wday = [] # Group dates by each of the weekday
-  weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] # Labels
 
-  for obj in calander_sort:
+  for obj in calendar_sort:
     if (u != wday(obj)): # Reset when the for statement gives it next weekday.
       each_wday = []
       u = wday(obj)
-      if (add_label is True): each_wday.insert(0, weekday[wday(obj)])
       result.append(each_wday) # Append it to the result (parent list).
     each_wday.append(obj)
 
   return result
 
+# Without this function, JavaScript will receive something like this. [[datetime.date('20XX-XX-XX'), ...]]
+def convert_calendar_to_text(calendar):
+  result = []
+  for row in calendar:
+    temp = []
+    for cell in row:
+      temp.append(formt(cell)) # Replacing dashes to slashes
+    result.append(temp)
+  return result
+
   # [ Print Calendar ]
   # u = None
-  # for obj in calander_sort:
+  # for obj in calendar_sort:
   #   if (u != wday(obj)):
   #     print("----")
   #     u = wday(obj)
