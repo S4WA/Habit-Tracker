@@ -4,6 +4,7 @@
   <title>My Habit Tracker</title>
   <link rel="stylesheet" type="text/css" href="static/css/style.css">
   <script src="https://momentjs.com/downloads/moment.js"></script>
+  <script src="static/javascript/graph.js"></script>
 </head>
 <body>
   <h1>My Habit Tracker<span id="title"></span></h1>
@@ -26,45 +27,7 @@
   <table id='graph'>
   </table>
   <script>
-    document.getElementById("title").innerText = ` in ${moment().format("MMMM YYYY")}`;
-
-    let calendar = {{ calendar|safe }},
-        data = {{ math_data|safe }}
-        graph = document.getElementById("graph"),
-        weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    for (let row = 0; row < calendar.length; row++) {
-      let row_el = document.createElement("tr")
-
-      for (let cell = 0; cell < calendar[row].length; cell++) {
-        if (cell == 0) {
-          let label = document.createElement("td");
-          label.classList.add("label");
-          label.innerText = weekdays[row];
-          row_el.append(label);
-        }
-
-        let cell_el = document.createElement("td"),
-            date = moment(calendar[row][cell], "MM/DD/YYYY"),
-            head = `${date.month()+1}/${date.date()}/${date.year()}`,
-            percentage = data[head] != null ? Math.round(data[head][0]/data[head][1]*100) : 0;
-
-        cell_el.title = `${head}`;
-        cell_el.classList.add("cldr_cell");
-        cell_el.classList.add(`p${Math.ceil(percentage/25)*25}`); // Background color for each cell in the graph
-        cell_el.setAttribute("p", percentage);
-
-        if (percentage != 0) {
-          cell_el.title += ` | ${percentage}%`;
-        }
-        if (data[head] != null) {
-          cell_el.title += ` | ${data[head][0]}/${data[head][1]}`;
-        }
-
-        row_el.append(cell_el);
-      }
-      graph.append(row_el);
-    }
+    document.addEventListener("DOMContentLoaded", gen_graph( {{ calendar|safe }}, {{ math_data|safe }} ));
   </script>
 </body>
 </html>

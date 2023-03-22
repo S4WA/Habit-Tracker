@@ -14,25 +14,28 @@ def hello_world():
   data = sh.get_all_records()
   cl_names = sh.row_values(1)
 
-  zcalendar.dates = []
-
+  zcalendar.dates = [] # Reset the array everytime someone access to the index page
   math_data = {}
+
   # For each rows
   for x in data:
-    children = 0
-    parents  = 0
+    children, parents = 0, 0
+
     # For each columns
     for name in cl_names: # Cells below
       # Add to the list
       if (name == "Date"):
-        print(x[name])
         zcalendar.add(x[name])
       else: # Calculation
         val = x[name].split("/")
-        if (len(val) == 0 or val[0] == ''): continue
+        if (len(val) == 0 or val[0] == ''): continue # Ignore if it's empty.
         children += int(empty_check(val[0]))
         parents  += int(empty_check(val[1]))
-    math_data[x["Date"]] = [ children, parents ]
+
+    # Without this if statement, it will add unnecessary data.
+    # Specifically when the row has only the date and doesn't have any other data in the other cells  
+    if (children != 0 and parents != 0): # To make sure both, denominator and numerator is not 0.
+      math_data[x["Date"]] = [ children, parents ]
 
   # Fill the empty areas in calendar
   zcalendar.fill_empty_dates(zcalendar.dates)
