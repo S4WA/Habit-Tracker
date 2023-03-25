@@ -20,7 +20,6 @@ def hello_world():
   # For each rows
   for x in data:
     children, parents = 0, 0
-
     # For each columns
     for name in cl_names: # Cells below
       # Add to the list
@@ -28,12 +27,13 @@ def hello_world():
         zcalendar.add(x[name])
       else: # Calculation
         val = x[name].split("/")
-        if (len(val) == 0 or val[0] == ''): continue # Ignore if it's empty.
+        if (len(val) < 2):
+          continue # Ignore if it's empty.
         children += int(empty_check(val[0]))
         parents  += int(empty_check(val[1]))
 
     # Without this if statement, it will add unnecessary data.
-    # Specifically when the row has only the date and doesn't have any other data in the other cells  
+    # Specifically when the row has only the date and doesn't have any other data in the other cells, or Simply it's 0/0.
     if (children != 0 and parents != 0): # To make sure both, denominator and numerator is not 0.
       math_data[x["Date"]] = [ children, parents ]
 

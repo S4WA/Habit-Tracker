@@ -10,24 +10,15 @@
   <h1>My Habit Tracker<span id="title"></span></h1>
   <table id='pure_log'>
     <tr>
-    {% for name in cl_names %}
-      <th>{{ name }}</th>
-    {% endfor %}
-    </tr>
-
-    {% for row in data %}
-    <tr>
-      {% for name in cl_names %}
-      <td>{{ row[name] }}</td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
   </table>
   <h1>Graph</h1>
   <table id='graph'>
   </table>
   <script>
-    document.addEventListener("DOMContentLoaded", gen_graph( {{ calendar|safe }}, {{ math_data|safe }} ));
+    document.addEventListener("DOMContentLoaded", function () {
+      gen_graph( {{ calendar|safe }}, {{ math_data|safe }} );
+      gen_pure_log( {{ cl_names|safe }}, {{ data|safe }} );
+    });
   </script>
 </body>
 </html>

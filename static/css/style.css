@@ -3,7 +3,12 @@ table, th, td {
 }
 
 #pure_log th, #pure_log td {
-  padding: 0 1em;
+  width: fit-content;
+  height: fit-content;
+}
+
+#today {
+  border-width: 2px;
 }
 
 .cldr_cell {
