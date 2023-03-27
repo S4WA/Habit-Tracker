@@ -8,7 +8,12 @@ table, th, td {
 }
 
 #today {
+  border-style: double;
   border-width: 2px;
+}
+
+#today.p0 {
+  border-color: #FFF;
 }
 
 .cldr_cell {

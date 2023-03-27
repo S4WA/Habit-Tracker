@@ -21,9 +21,12 @@ function gen_graph(calendar, math_d) {
           head = `${date.month()+1}/${date.date()}/${date.year()}`,
           percentage = math_d[head] != null && math_d[head].length != 0 ? Math.round(math_d[head][0]/math_d[head][1]*100) : 0;
 
-      cell_el.title = `${head}`;
+      cell_el.title = head;
       cell_el.classList.add("cldr_cell");
       cell_el.classList.add(`p${Math.ceil(percentage/25)*25}`); // Background color for each cell in the graph
+      if (date.isSame(moment(), "day")) {
+        cell_el.id = "today";
+      }
       cell_el.setAttribute("p", percentage);
 
       if (percentage > 0) {
